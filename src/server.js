@@ -1,14 +1,15 @@
-const { createServer } = require('http')
-const { parse } = require('url')
-const next = require('next')
- 
+import { createServer } from 'http';
+import { parse } from 'url';
+import next  from 'next';
+import axios from 'axios';
 const dev = process.env.NODE_ENV !== 'production'
+const jambaseAPIKEY = process.env.JAMBASE_API;
 const hostname = 'localhost'
 const port = 3000
 // when using middleware `hostname` and `port` must be provided below
 const app = next({ dev, hostname, port })
 const handle = app.getRequestHandler()
- 
+console.log('jambaseapit', jambaseAPIKEY)
 app.prepare().then(() => {
   createServer(async (req, res) => {
     try {
@@ -16,7 +17,9 @@ app.prepare().then(() => {
       // This tells it to parse the query portion of the URL.
       const parsedUrl = parse(req.url, true)
       const { pathname, query } = parsedUrl
- 
+      if(pathname === '/api') {
+        await axios.get(`https://www.jambase.com/jb-api/v1/events?geoCityId=jambase%3A4227820&geoCountryIso2=US&apikey=${JAMBASE_API}`)
+      }
       if (pathname === '/a') {
         await app.render(req, res, '/a', query)
       } else if (pathname === '/b') {
