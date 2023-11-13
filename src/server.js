@@ -1,7 +1,8 @@
-import { createServer } from 'http';
-import { parse } from 'url';
-import next  from 'next';
-import axios from 'axios';
+const { createServer } = require('http')
+const { parse } = require('url')
+const next = require('next')
+const axios = require('axios');
+require('dotenv').config()
 const dev = process.env.NODE_ENV !== 'production'
 const jambaseAPIKEY = process.env.JAMBASE_API;
 const hostname = 'localhost'
