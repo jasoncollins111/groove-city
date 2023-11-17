@@ -25,3 +25,10 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+button{
+  background-color: #1976d2 !important;
+}
+input{
+  padding: 10px;
+}
