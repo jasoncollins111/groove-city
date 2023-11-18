@@ -47,15 +47,17 @@ export default function Home() {
       const artist = performer[0].name;
 
       return(
-        <Card key={idx} variant="outlined" className='mb-10'>
+        <Card key={idx} variant="outlined" className='mb-10 w-full tablet:w-6/12 desktop:w-5/12'>
           <Image src={event?.image} width="700" height="700" alt="Picture of artist"/>
           <Box className='flex justify-between'>
             <Typography className='mx-3'>{month}/{day} </Typography>
-            <Typography className='mx-3'>{artist} @ {venue}</Typography>
             <Typography className='mx-3'>{genre}</Typography>
           </Box>
+          <Box className='flex justify-start'>
+            <Typography className='text-xl mx-3'>{artist} at {venue}</Typography>
+          </Box>
           <Box className='flex justify-end'>
-            <Link className='mx-3' href={ticketLink}>Tickets</Link>
+            <Link className='mx-3 text-lg' href={ticketLink}>Tickets</Link>
           </Box>
         </Card>
       )
@@ -71,17 +73,18 @@ export default function Home() {
   }, [mapEvents])
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
-      <div className="z-10 max-w-5xl w-full items-center lg:flex mb-10 justify-center">
-        <Typography className='font-sans text-3xl'>Groove City</Typography>
+    <main className="flex min-h-screen flex-col items-center p-0 tablet:p-8 desktop:p-24">
+      <div className="flex z-10 max-w-5xl w-full items-center lg:flex justify-center">
+        <Typography className='font-sans text-3xl'>Groove City </Typography>
       </div>
-      <form onSubmit={getEvents}>
-        <div className='flex space-x-4 mb-10'>
-          <TextField id="outlined-basic" label="city" variant="outlined" />
-          <TextField id="outlined-basic" label="state" variant="outlined" />
-          <Button type="submit" variant="contained">Find your groove</Button>
+        <Typography className='font-sans text-xl mb-5'>Denver, CO</Typography>
+      {/* <form onSubmit={getEvents}>
+        <div className='block tablet:flex tablet:space-x-4 mb-10'>
+          <TextField className="w-full" id="outlined-basic" label="city" variant="outlined" />
+          <TextField className="w-full" id="outlined-basic" label="state" variant="outlined" />
+          <Button className="w-full" type="submit" variant="contained">Find your groove</Button>
         </div>
-      </form>
+      </form> */}
       {events}
     </main>
   )
