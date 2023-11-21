@@ -37,7 +37,7 @@ export default function Home() {
       const {location, performer, startDate, offers, image} = event;
       const venue = location.name;
       return(
-        <ConcertCard eventData={{venue, performer, startDate, offers, image}}/>
+        <ConcertCard key={idx} eventData={{venue, performer, startDate, offers, image}}/>
       )
     })
     setEvents(eventMap);
