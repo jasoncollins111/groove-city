@@ -7,7 +7,7 @@ import clsx from 'clsx';
 
 export default function SideNav() {
 
-  const [toggleDrawer, setToggleDrawer] = useState(true);
+  const [toggleDrawer, setToggleDrawer] = useState(false);
   const anchor = 'right'
   const pathname = usePathname();
 
