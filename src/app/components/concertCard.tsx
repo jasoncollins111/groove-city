@@ -1,7 +1,7 @@
 import {Box, Card, Link, Typography} from '@mui/material';
 import Image from 'next/image';
 import {DateTime} from "luxon";
-import {Artist, Offer} from '../home/page';
+import {Artist, Offer} from './concertFeed';
 import { capitalizeAndReplace } from '../lib/utils';
 interface Event{
     eventData: {
