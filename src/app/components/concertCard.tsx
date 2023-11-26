@@ -29,7 +29,7 @@ export default function ConcertCard(props: Event) {
             <Image src={image} width="700" height="700" alt="Picture of artist"/>
             <Box className='flex justify-between'>
                 <Typography className='mx-3'>{formattedDate}</Typography>
-                <Typography className='mx-3'>{genre}</Typography>
+                <Typography className='mx-3 italic'>{genre}</Typography>
             </Box>
             <Box className='flex justify-between mb-1'>
                 <Typography className='text-xl mx-3'>{artist} at {venue}</Typography>
