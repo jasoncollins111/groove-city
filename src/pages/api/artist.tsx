@@ -6,7 +6,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const artistId = req?.query?.id;
     try {
         const results = await axios.get(`https://www.jambase.com/jb-api/v1/artists/id/${artistId}?apikey=${jambaseAPIKEY}`);
-        const data = results?.data?.event
+        const data = results?.data?.artist
         return res.json(data);
         
     } catch (error) {

@@ -12,7 +12,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 export default function ButtonAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed">
+      <AppBar className='bg-teal-700' position="fixed">
         <Toolbar>
           <IconButton
             size="large"
@@ -23,8 +23,8 @@ export default function ButtonAppBar() {
           >
             {/* <MenuIcon /> */}
           </IconButton>
-          <Link href='/'>
-          <Typography className="text-white" variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Link className='no-underline' href='/'>
+          <Typography className="text-white no-underline" variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Groove City - Denver, Colorado
           </Typography>
 
