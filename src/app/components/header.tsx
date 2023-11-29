@@ -2,6 +2,8 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
+import Link from '@mui/material/Link';
+
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -21,9 +23,12 @@ export default function ButtonAppBar() {
           >
             {/* <MenuIcon /> */}
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Link href='/'>
+          <Typography className="text-white" variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Groove City - Denver, Colorado
           </Typography>
+
+          </Link>
           {/* <Button color="inherit">Login</Button> */}
         </Toolbar>
       </AppBar>

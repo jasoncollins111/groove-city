@@ -34,7 +34,8 @@ export default function ConcertCard(props: Event) {
             </Box>
             <Box className='flex justify-between mb-1'>
                 <Link className='no-underline' href={`/event?id=${identifier}`}>
-                    <Typography className='text-xl mx-3'>{artist} at {venue}</Typography>
+                    <Typography className='text-xl mx-3'>{artist}</Typography>
+                    <Typography className='text-xl mx-3'>{venue}</Typography>
                 </Link>
                 <Link className='mx-3 text-lg no-underline' href={ticketLink}>Tickets</Link>
             </Box>

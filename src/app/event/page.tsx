@@ -1,15 +1,15 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { Box, Button, Typography, Link } from '@mui/material';
 import { useSearchParams } from 'next/navigation'
 import axios from 'axios';
-import Image from 'next/image';
-import {capitalizeAndReplace} from '../lib/utils';
 import Loading from '../loading';
 import EventDetails from './eventDetails';
+import Header from '../components/header'
+
 interface EventData{
     image: string
     name: string
+    startDate: string
     performer: [
         Performer
     ]
@@ -21,7 +21,8 @@ interface EventData{
             url: string
         }
     ]
-  }
+}
+
 interface Performer{
     genre: [
         string
@@ -30,9 +31,10 @@ interface Performer{
     identifier: string
     image: string
 }
+
 export default function Event() {
     const searchParams = useSearchParams()
-    const [eventData, setEventData] = useState<EventData>({location: {name: ''}, offers: [{url: ''}], image: '', name: '', performer: [{genre:[''], name:'', identifier: '', image: ''}]});
+    const [eventData, setEventData] = useState<EventData>({location: {name: ''}, offers: [{url: ''}], startDate: '', image: '', name: '', performer: [{genre:[''], name:'', identifier: '', image: ''}]});
 
     useEffect(()=> {
         getEvent();
@@ -47,6 +49,7 @@ export default function Event() {
 
     return (
         <main>
+            <Header/>
             {!eventData.image ? <Loading/> : <EventDetails eventData={eventData}/> }
         </main>
     )
