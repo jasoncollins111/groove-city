@@ -3,14 +3,12 @@ import Image from 'next/image';
 import {capitalizeAndReplace} from '../lib/utils';
 
 interface Artist{
-    artist:{
-        genre: [
-            string
-        ]
-        name: string
-        identifier: string
-        image: string
-        sameAs: SocialLink[]
+    artist?:{
+        genre?: []
+        name?: string
+        identifier?: string
+        image?: string
+        sameAs?: SocialLink[]
     }
 }
 
@@ -46,12 +44,16 @@ export default function ArtistDetails(props: Artist) {
         }
         return links;
     },[] as JSX.Element[]);
-
+    // const genre = artist?.genre ? capitalizeAndReplace(artist?.genre[0]) : 'Live Music'
+    // if(artist?.genre){
+    //     capitalizeAndReplace(artist?.genre[0])
+    // }
+    // const genre = artist?.genre.length >  ? capitalizeAndReplace(artist?.genre[0]) : 'Live Music'
     return (
         <Box className="flex flex-col mt-4 items-center p-0 tablet:p-8 desktop:p-24">
-            <Image src={artist.image} height='1000' width='1000' alt='photo of performer'/>
-            <Typography className='hover:text-violet-700'>{artist.name}</Typography>
-            <Typography>{capitalizeAndReplace(artist?.genre[0])}</Typography>
+            {artist?.image && <Image src={artist?.image} height='1000' width='1000' alt='photo of performer'/>}
+            <Typography className='hover:text-violet-700'>{artist?.name}</Typography>
+            {/* <Typography>{}</Typography> */}
             {socialLinks}
         </Box>
     )

@@ -5,20 +5,13 @@ import axios from 'axios';
 import Loading from '../loading';
 import ArtistDetails from './artistDetails';
 
-interface ArtistData{
-    genre: [
-        string
-    ]
-    name: string
-    identifier: string
-    image: string
-}
 export default function Artist() {
     const searchParams = useSearchParams()
-    const [artist, setArtist] = useState<ArtistData>({genre: [''], name: '', identifier: '', image: ''});
+    const [artist, setArtist] = useState({image: ''});
 
     useEffect(()=> {
-        getArtist();
+        // getArtist();
+        login()
     },[])
 
     async function getArtist(){
@@ -28,9 +21,16 @@ export default function Artist() {
         setArtist(data);
     }
 
+    async function login(){
+        const results = await axios.get('/api/login');
+        console.log('results', results)
+        // const {data} = results;
+        // setArtist(data);
+    }
+
     return (
         <main>
-            {!artist.image ? <Loading/> : <ArtistDetails artist={artist}/> }
+            {!artist?.image ? <Loading/> : <ArtistDetails artist={artist}/> }
         </main>
     )
 }

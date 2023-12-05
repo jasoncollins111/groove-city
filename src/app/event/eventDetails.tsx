@@ -52,6 +52,7 @@ export default function EventDetails(props: EventData) {
     const ticketLink = eventData?.offers[0].url;
     const date = DateTime.fromISO(eventData?.startDate);
     const formattedDate = date.toLocaleString(DateTime.DATETIME_MED);
+
     return (
         <main className="flex flex-col mt-16 items-center p-0 tablet:p-8 desktop:p-24">
             <Box className="flex mb-8">
