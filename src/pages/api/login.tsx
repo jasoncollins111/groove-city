@@ -3,6 +3,7 @@ import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { redirect } from 'next/navigation'
 import open from 'open';
+const client = require('../../app/lib/redis');
 
 const generateRandomString = (length: number): string => {
     let text = '';
@@ -15,12 +16,21 @@ const generateRandomString = (length: number): string => {
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-
+  const artistId = req?.query?.id;
   if (!spotify_client_id) {
     throw new Error('Spotify Client ID is not defined');
   }
+
+  await client.set('savedUrl', `/artist?performer=${artistId}`, (err: Error, reply: string) => {
+    if(err){
+        console.log('err', err);
+    } else{
+        console.log('reply', reply);
+    }
+  });
+
   try{
-    const scope = "streaming user-read-email user-read-private";
+    const scope = "streaming user-modify-playback-state user-read-email user-read-private";
 
     const state = generateRandomString(16);
     const auth_query_parameters = new URLSearchParams({

@@ -10,19 +10,20 @@ export default function Artist() {
     const [artist, setArtist] = useState({image: ''});
 
     useEffect(()=> {
-        // getArtist();
-        login()
+        getArtist();
     },[])
 
     async function getArtist(){
         const id = searchParams?.get('performer')
+        // await login();
         const results = await axios.get('/api/artist', { params: { id } });
         const {data} = results;
         setArtist(data);
     }
 
     async function login(){
-        const results = await axios.get('/api/login');
+        const id = searchParams?.get('performer')
+        const results = await axios.get('/api/login', { params: { id } });
         console.log('results', results)
         // const {data} = results;
         // setArtist(data);
