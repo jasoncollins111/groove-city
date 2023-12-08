@@ -1,10 +1,11 @@
-import { Box, Button, IconButton, Typography, Link } from '@mui/material';
+import { useState, useEffect } from 'react';
+import { Box, Typography, Link } from '@mui/material';
+import { useSearchParams } from 'next/navigation'
 import PlayCircleFilled from '@mui/icons-material/PlayCircleFilled';
-import { useState } from 'react'
 import Image from 'next/image';
-import {capitalizeAndReplace} from '../lib/utils';
 import axios from 'axios';
 import WebPlayback from './webPlayer';
+
 interface Artist{
     artist?:{
         genre?: []
@@ -33,7 +34,13 @@ export default function ArtistDetails(props: Artist) {
     const {artist} = props;
     const [token, setToken] = useState('');
     const [artistUri, setArtistUri] = useState('');
+    const searchParams = useSearchParams()
 
+    // useEffect(()=>{
+    //     if(!token){
+    //         // login();
+    //     }
+    // },[token])
     const socialPlatforms: SocialPlatforms = {
         facebook: 'Facebook',
         instagram: 'Instagram',
@@ -52,11 +59,19 @@ export default function ArtistDetails(props: Artist) {
 
     async function spotifyPlayer(){
         const {data} = await axios.get('/api/token');
-        const spotifyArtist = await axios.get(`/api/spotify-search?artist=${artist?.name}`)
+        console.log('data token', data)
         setToken(data);
+        const spotifyArtist = await axios.get(`/api/spotify-search?artist=${artist?.name}`)
         setArtistUri(spotifyArtist?.data);
     }
 
+    // async function login(){
+    //     const id = searchParams?.get('performer')
+    //     const results = await axios.get('/api/login', { params: { id } });
+    //     console.log('results', results)
+    //     // const {data} = results;
+    //     // setArtist(data);
+    // }
 
 
     // const genre = artist?.genre ? capitalizeAndReplace(artist?.genre[0]) : 'Live Music'
@@ -74,3 +89,6 @@ export default function ArtistDetails(props: Artist) {
         </Box>
     )
 }
+
+
+// {token && <WebPlayback token={token}/> }

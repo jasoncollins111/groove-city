@@ -31,7 +31,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try{
     const scope = "streaming user-modify-playback-state user-read-email user-read-private";
-
     const state = generateRandomString(16);
     const auth_query_parameters = new URLSearchParams({
       response_type: "code",

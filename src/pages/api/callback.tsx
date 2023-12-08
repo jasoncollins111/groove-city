@@ -22,6 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const response = await axios.post(authOptions.url, authOptions.data, { headers: authOptions.headers });
     if (response.status === 200) {
+      console.log('logged in')
       var access_token = response.data.access_token;
       const refresh_token = response.data.refresh_token;
       await client.set('accessToken', access_token);

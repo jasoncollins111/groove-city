@@ -23,10 +23,7 @@ export default function Artist() {
 
     async function login(){
         const id = searchParams?.get('performer')
-        const results = await axios.get('/api/login', { params: { id } });
-        console.log('results', results)
-        // const {data} = results;
-        // setArtist(data);
+        await axios.get('/api/login', { params: { id } });
     }
 
     return (
