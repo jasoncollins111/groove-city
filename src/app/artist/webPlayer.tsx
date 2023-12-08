@@ -71,7 +71,7 @@ const WebPlayback: React.FC<PlayerProps> = (props: PlayerProps) => {
                 console.log('Device ID has gone offline', device_id);
             });
 
-            player.addListener('player_state_changed', ( state => {
+            player.addListener('player_state_changed', ((state: Spotify.PlaybackState | null) => {
 
                 if (!state) {
                     return;
