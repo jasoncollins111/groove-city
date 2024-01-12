@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const authOptions = {
     url: 'https://accounts.spotify.com/api/token',
     data: {
-      code: code,
+      code: code, 
       redirect_uri: "http://localhost:3000/api/callback",
       grant_type: 'authorization_code'
     },

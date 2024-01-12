@@ -1,7 +1,5 @@
 const spotify_client_id = process.env.SPOTIFY_CLIENT_ID;
-import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { redirect } from 'next/navigation'
 import open from 'open';
 const client = require('../../app/lib/redis');
 

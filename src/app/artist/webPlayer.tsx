@@ -3,6 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
+import StopCircleIcon from '@mui/icons-material/StopCircle';
+import SkipNextIcon from '@mui/icons-material/SkipNext';
+import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 interface PlayerProps {
     token: string;
@@ -38,7 +42,7 @@ const track = {
 
 const WebPlayback: React.FC<PlayerProps> = (props: PlayerProps) => {
     const [player, setPlayer] = useState<Player | null>(null);
-    const [is_paused, setPaused] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(true);
     const [is_active, setActive] = useState(false);
     const [current_track, setTrack] = useState(track);
     
@@ -71,7 +75,7 @@ const WebPlayback: React.FC<PlayerProps> = (props: PlayerProps) => {
                 console.log('Device ID has gone offline', device_id);
             });
 
-            player.addListener('player_state_changed', ((state: Spotify.PlaybackState | null) => {
+            player.addListener('player_state_changed', (state: Spotify.PlaybackState | null) => {
 
                 if (!state) {
                     return;
@@ -85,39 +89,44 @@ const WebPlayback: React.FC<PlayerProps> = (props: PlayerProps) => {
                     (!state)? setActive(false) : setActive(true) 
                 });
             
-            }));
+            });
 
             player.connect();
             setPlayer(player);
-
         };
     }, []);
 
+    async function previousTrack(){
+        await axios.get('/api/play-previous', { params: { token: props.token } });
+        setIsPlaying(true);
+
+    }
     async function nextTrack(){
         await axios.get('/api/play-next', { params: { token: props.token } });
-
-        // if (player) {
-        //     player.nextTrack().then(() => {
-        //         console.log('Skipped to next track!');
-        //     });
-        // } else {
-        //     console.log('Player is not initialized');
-        // }
+        setIsPlaying(true);
+    }
+    async function togglePlay(){
+        if(isPlaying){
+            await axios.get('/api/pause', { params: { token: props.token, isPlaying: !isPlaying } });
+        } else{
+            await axios.get('/api/play', { params: { token: props.token, isPlaying: !isPlaying } });
+        }
+        setIsPlaying(!isPlaying)
     }
 
     return (
         <>
             <div className="container">
-                <div className="main-wrapper">
-                    <Image src={current_track.album.images[0].url} width='200' height='200' className="now-playing__cover" alt="" />
+                <div className="main-wrapper flex justify-center">
+                    {current_track.album.images[0].url && <Image src={current_track.album.images[0].url} width='200' height='200' className="now-playing__cover" alt="" />}
 
-                    <div className="now-playing__side">
-                        <div className="now-playing__name">{current_track.name}</div>
-                        <div className="now-playing__artist">{current_track.artists[0].name}</div>
-                        {/* <button className="btn-spotify" onClick={() => { previousTrack() }} >&lt;&lt;</button> */}
-                        {/* <button className="btn-spotify" onClick={() => { player?.togglePlay() }}>{ is_paused ? "PLAY" : "PAUSE" }</button> */}
-                        <button className="btn-spotify" onClick={() => { nextTrack() }}>&gt;&gt;</button>
-                    </div>
+                </div>
+                <div className="now-playing__side flex justify-center">
+                    <div className="now-playing__name">{current_track.name}</div>
+                    <div className="now-playing__artist">{current_track.artists[0].name}</div>
+                    <button className="btn-spotify" onClick={() => { previousTrack() }} ><SkipPreviousIcon/></button>
+                    <button className="btn-spotify" onClick={() => { togglePlay() }}>{ isPlaying ? <StopCircleIcon/> : <PlayArrowIcon/>}</button>
+                    <button className="btn-spotify" onClick={() => { nextTrack() }}><SkipNextIcon/></button>
                 </div>
             </div>
         </>
