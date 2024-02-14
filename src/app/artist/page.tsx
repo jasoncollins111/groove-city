@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation'
 import axios from 'axios';
 import Loading from '../loading';
 import ArtistDetails from './artistDetails';
+import Header from '../components/header'
 
 export default function Artist() {
     const searchParams = useSearchParams()
@@ -32,6 +33,7 @@ export default function Artist() {
 
     return (
         <main>
+            <Header/>
             {!artist?.image ? <Loading/> : <ArtistDetails artist={artist} events={events}/> }
         </main>
     )
