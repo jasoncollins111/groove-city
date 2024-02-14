@@ -8,7 +8,7 @@ import ArtistDetails from './artistDetails';
 export default function Artist() {
     const searchParams = useSearchParams()
     const [artist, setArtist] = useState({image: ''});
-    const [events, setEvents] = useState({});
+    const [events, setEvents] = useState([]);
 
     useEffect(()=> {
         getArtist();
