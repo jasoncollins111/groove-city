@@ -47,9 +47,9 @@ export default function ArtistDetails(props: Artist) {
         return links;
     },[] as JSX.Element[]);
 
-    const artistEvents = events?.map(event => {
+    const artistEvents = events?.map((event, idx) => {
         return (
-            <Typography>{event?.location?.name} - {event.startDate}</Typography>
+            <Typography key={idx}>{event?.location?.name} - {event.startDate}</Typography>
         )
     })
 
