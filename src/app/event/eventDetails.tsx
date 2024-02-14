@@ -49,7 +49,7 @@ export default function EventDetails(props: EventData) {
     const headliner = eventData?.performer[0].name;
     const headlinerLink = `/artist?performer=${eventData?.performer[0]?.identifier}`
     const venue = eventData?.location.name;
-    const ticketLink = eventData?.offers[0].url;
+    const ticketLink = eventData?.offers[0]?.url;
     const date = DateTime.fromISO(eventData?.startDate);
     const formattedDate = date.toLocaleString(DateTime.DATETIME_MED);
 

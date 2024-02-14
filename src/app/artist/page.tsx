@@ -8,6 +8,7 @@ import ArtistDetails from './artistDetails';
 export default function Artist() {
     const searchParams = useSearchParams()
     const [artist, setArtist] = useState({image: ''});
+    const [events, setEvents] = useState({});
 
     useEffect(()=> {
         getArtist();
@@ -16,9 +17,12 @@ export default function Artist() {
     async function getArtist(){
         const id = searchParams?.get('performer')
         // await login();
-        const results = await axios.get('/api/artist', { params: { id } });
-        const {data} = results;
+        const artistResults = await axios.get('/api/artist', { params: { id } });
+        const artistEvents = await axios.get('/api/artistEvents', { params: { id } });
+        const events = artistEvents.data;
+        const {data} = artistResults;
         setArtist(data);
+        setEvents(events);
     }
 
     async function login(){
@@ -28,7 +32,7 @@ export default function Artist() {
 
     return (
         <main>
-            {!artist?.image ? <Loading/> : <ArtistDetails artist={artist}/> }
+            {!artist?.image ? <Loading/> : <ArtistDetails artist={artist} events={events}/> }
         </main>
     )
 }
