@@ -18,10 +18,10 @@ export default function Artist() {
     async function getArtist(){
         const id = searchParams?.get('performer')
         const artistEvents = await axios.get('/api/artistEvents', { params: { id } });
-        // const artistResults = await axios.get('/api/artist', { params: { id } });
+        const artistResults = await axios.get('/api/artist', { params: { id } });
         const events = artistEvents.data;
-        // const {data} = artistResults;
-        // setArtist(data);
+        const {data} = artistResults;
+        setArtist(data);
         setEvents(events);
     }
 
@@ -33,7 +33,8 @@ export default function Artist() {
     return (
         <main>
             <Header/>
-            {!artist?.image ? <Loading/> : <ArtistDetails artist={artist} events={events}/> }
+            <ArtistDetails artist={artist} events={events}/>
+            {/* {!artist?.image ? <Loading/> : <ArtistDetails artist={artist} events={events}/> } */}
         </main>
     )
 }
