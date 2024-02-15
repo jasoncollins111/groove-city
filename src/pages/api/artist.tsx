@@ -5,13 +5,13 @@ const client = require('../../app/lib/redis');
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const artistId = req?.query?.id;
-    await client.set('savedUrl', `/artist?performer=${artistId}`, (err: Error, reply: string) => {
-        if(err){
-            console.log('err', err);
-        } else{
-            console.log('reply', reply);
-        }
-    });
+    // await client.set('savedUrl', `/artist?performer=${artistId}`, (err: Error, reply: string) => {
+    //     if(err){
+    //         console.log('err', err);
+    //     } else{
+    //         console.log('reply', reply);
+    //     }
+    // });
 
     try {
         const results = await axios.get(`https://www.jambase.com/jb-api/v1/artists/id/${artistId}?apikey=${jambaseAPIKEY}`);
