@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import axios from 'axios';
 import Loading from '../loading';
@@ -13,17 +13,17 @@ export default function Artist() {
 
     useEffect(()=> {
         getArtist();
-    },[getArtist])
+    },[])
 
-    async function getArtist(){
+    const getArtist = useMemo(() =>async () => {
         const id = searchParams?.get('performer')
-        // const artistEvents = await axios.get('/api/artistEvents', { params: { id } });
+        const artistEvents = await axios.get('/api/artistEvents', { params: { id } });
         const artistResults = await axios.get('/api/artist', { params: { id } });
-        // const events = artistEvents.data;
+        const events = artistEvents.data;
         const {data} = artistResults;
         setArtist(data);
-        // setEvents(events);
-    }
+        setEvents(events);
+    },[])
 
     async function login(){
         const id = searchParams?.get('performer')
