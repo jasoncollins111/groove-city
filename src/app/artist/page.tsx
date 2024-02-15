@@ -13,7 +13,7 @@ export default function Artist() {
 
     useEffect(()=> {
         getArtist();
-    },[])
+    },[getArtist])
 
     async function getArtist(){
         const id = searchParams?.get('performer')
