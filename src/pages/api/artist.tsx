@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         
     } catch (error) {
         return {
-            message: 'Fetch Error: Failed to Find Event.',
+            message: 'Fetch Error: Failed to Find Artist.',
           };
     }
 }
