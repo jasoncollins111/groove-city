@@ -15,7 +15,7 @@ export default function Artist() {
         getArtist();
     },[])
 
-    const getArtist = useMemo(() =>async () => {
+    const getArtist = useMemo(() => async () => {
         const id = searchParams?.get('performer')
         const artistEvents = await axios.get('/api/artistEvents', { params: { id } });
         const artistResults = await axios.get('/api/artist', { params: { id } });
@@ -24,11 +24,6 @@ export default function Artist() {
         setArtist(data);
         setEvents(events);
     },[])
-
-    async function login(){
-        const id = searchParams?.get('performer')
-        await axios.get('/api/login', { params: { id } });
-    }
 
     return (
         <main>

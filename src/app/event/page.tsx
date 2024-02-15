@@ -43,8 +43,6 @@ export default function Event() {
     async function getEvent(){
         const id = searchParams?.get('id')
         const results = await axios.get('/api/event', { params: { id } });
-        const artist = await axios.get('/api/artist', { params: { id: 'jambase:250575' } });
-
         const {data} = results;
         setEventData(data);
     }
