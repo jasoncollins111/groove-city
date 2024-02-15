@@ -17,12 +17,12 @@ export default function Artist() {
 
     async function getArtist(){
         const id = searchParams?.get('performer')
-        const artistEvents = await axios.get('/api/artistEvents', { params: { id } });
-        // const artistResults = await axios.get('/api/artist', { params: { id } });
-        const events = artistEvents.data;
-        // const {data} = artistResults;
-        // setArtist(data);
-        setEvents(events);
+        // const artistEvents = await axios.get('/api/artistEvents', { params: { id } });
+        const artistResults = await axios.get('/api/artist', { params: { id } });
+        // const events = artistEvents.data;
+        const {data} = artistResults;
+        setArtist(data);
+        // setEvents(events);
     }
 
     async function login(){
